@@ -1,18 +1,31 @@
-I understand. Let me format the README using markdown syntax so it appears nicely:
+
+
+# VMS
+
+Certainly! Here's the description using "VMS" instead of "I":
 
 ---
 
-# Project Name
+Vendor Management System(VMS) was developed using Django and Django REST Framework. VMS handles vendor profiles, tracks purchase orders, and calculates vendor performance metrics.
 
-Brief description or overview of your project.
+As a vendor management tool, it efficiently manage vendor profiles, including storing essential information such as names, contact details, addresses, and unique vendor codes.
+
+Moreover, VMS can track purchase orders seamlessly. VMS enables to create, retrieve, update, and delete purchase orders. VMS can also list all purchase orders, with the option to filter them by vendor.
+
+One of the key features of VMS is its ability to calculate vendor performance metrics. VMS can track metrics such as on-time delivery rates, quality ratings, average response times, and fulfillment rates over time. This historical data enables VMS to analyze trends and make informed decisions when working with vendors.
+
+In summary,  Vendor Management System streamlines vendor operations, improves efficiency, and provides valuable insights into vendor performance.
+
+--- 
+
+Feel free to let me know if you need further adjustments!
 
 ## Table of Contents
 
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [API Endpoints](#api-endpoints)
-4. [Contributing](#contributing)
-5. [License](#license)
+
 
 ## Installation
 
