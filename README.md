@@ -12,9 +12,7 @@ One of the key features of VMS is its ability to calculate vendor performance me
 
 In summary,  Vendor Management System streamlines vendor operations, improves efficiency, and provides valuable insights into vendor performance.
 
---- 
 
-Feel free to let me know if you need further adjustments!
 
 ## Table of Contents
 
