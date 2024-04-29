@@ -14,10 +14,10 @@ def purchase_order_list(request):
         else:
             purchase_orders = PurchaseOrder.objects.all()
 
-        data = [{'po_number': po.po_number, 'vendor_id': po.vendor_id, 'order_date': po.order_date,
-                 'delivery_date': po.delivery_date, 'items': po.items, 'quantity': po.quantity, 'status': po.status,
-                 'quality_rating': po.quality_rating, 'issue_date': po.issue_date,
-                 'acknowledgment_date': po.acknowledgment_date} for po in purchase_orders]
+        data = []
+        for po in purchase_orders:
+            pos = {**po.__dict__}
+            pos.pop('_state', None)
         return JsonResponse(data, safe=False)
     elif request.method == 'POST':
         try:
@@ -58,11 +58,8 @@ def purchase_order_detail(request, pk):
         return JsonResponse({'error': 'Purchase Order not found'}, status=404)
 
     if request.method == 'GET':
-        data = {'po_number': purchase_order.po_number, 'vendor_id': purchase_order.vendor_id,
-                'order_date': purchase_order.order_date, 'delivery_date': purchase_order.delivery_date,
-                'items': purchase_order.items, 'quantity': purchase_order.quantity, 'status': purchase_order.status,
-                'quality_rating': purchase_order.quality_rating, 'issue_date': purchase_order.issue_date,
-                'acknowledgment_date': purchase_order.acknowledgment_date}
+        data = {**purchase_order.__dict__}
+        data.pop('_state', None)
         return JsonResponse(data)
     elif request.method == 'PUT':
         try:

@@ -8,7 +8,11 @@ import json
 def vendor_list(request):
     if request.method == 'GET':
         vendors = Vendor.objects.all()
-        data = [{'id': vendor.id, 'name': vendor.name, 'contact_details': vendor.contact_details, 'address': vendor.address, 'vendor_code': vendor.vendor_code} for vendor in vendors]
+        data = []
+        for vendor in vendors:
+            vendor_details = {**vendor.__dict__}
+            vendor_details.pop('_state', None)
+            data.append(vendor_details)
         return JsonResponse(data, safe=False)
     elif request.method == 'POST':
         try:
@@ -16,10 +20,9 @@ def vendor_list(request):
             name = data.get('name')
             contact_details = data.get('contact_details')
             address = data.get('address')
-            vendor_code = data.get('vendor_code')
 
-            if name and contact_details and address and vendor_code:
-                vendor = Vendor.objects.create(name=name, contact_details=contact_details, address=address, vendor_code=vendor_code)
+            if name and contact_details and address:
+                vendor = Vendor.objects.create(name=name, contact_details=contact_details, address=address)
                 return JsonResponse({'message': 'Vendor created successfully', 'id': vendor.id}, status=201)
             else:
                 return JsonResponse({'error': 'Missing required fields'}, status=400)
@@ -27,6 +30,8 @@ def vendor_list(request):
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+
 @csrf_exempt
 def vendor_detail(request, pk):
     try:
@@ -35,7 +40,8 @@ def vendor_detail(request, pk):
         return JsonResponse({'error': 'Vendor not found'}, status=404)
 
     if request.method == 'GET':
-        data = {'id': vendor.id, 'name': vendor.name, 'contact_details': vendor.contact_details, 'address': vendor.address, 'vendor_code': vendor.vendor_code}
+        data = {**vendor.__dict__}
+        data.pop('_state', None)
         return JsonResponse(data)
     elif request.method == 'PUT':
         try:
