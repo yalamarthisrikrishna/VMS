@@ -2,7 +2,6 @@
 
 # VMS
 
- ---
 Vendor Management System(VMS) was developed using Django and Django REST Framework. VMS handles vendor profiles, tracks purchase orders, and calculates vendor performance metrics.
 
 As a vendor management tool, it efficiently manage vendor profiles, including storing essential information such as names, contact details, addresses, and unique vendor codes.
