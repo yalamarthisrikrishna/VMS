@@ -22,23 +22,21 @@ def purchase_order_list(request):
     elif request.method == 'POST':
         try:
             data = json.loads(request.body)
-            po_number = data.get('po_number')
+            # po_number = data.get('po_number')
             vendor_id = data.get('vendor_id')
             order_date = data.get('order_date')
             delivery_date = data.get('delivery_date')
             items = data.get('items')
             quantity = data.get('quantity')
-            status = data.get('status')
-            quality_rating = data.get('quality_rating')
-            issue_date = data.get('issue_date')
-            acknowledgment_date = data.get('acknowledgment_date')
+            # status = data.get('status')
+            # quality_rating = data.get('quality_rating')
+            # issue_date = data.get('issue_date')
+            # acknowledgment_date = data.get('acknowledgment_date')
 
-            if po_number and vendor_id and order_date and delivery_date and items and quantity and status:
-                purchase_order = PurchaseOrder.objects.create(po_number=po_number, vendor_id=vendor_id,
+            if vendor_id and order_date and delivery_date and items and quantity:
+                purchase_order = PurchaseOrder.objects.create(vendor_id=vendor_id,
                                                               order_date=order_date, delivery_date=delivery_date,
-                                                              items=items, quantity=quantity, status=status,
-                                                              quality_rating=quality_rating, issue_date=issue_date,
-                                                              acknowledgment_date=acknowledgment_date)
+                                                              items=items, quantity=quantity)
                 return JsonResponse(
                     {'message': 'Purchase Order created successfully', 'po_number': purchase_order.po_number},
                     status=201)

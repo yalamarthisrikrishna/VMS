@@ -4,6 +4,8 @@ from django.db import models
 
 
 class Vendor(models.Model):
+    email = models.EmailField(max_length=100, null=False)
+    password = models.CharField(max_length=30, null=False)
     name = models.CharField(max_length=100)
     contact_details = models.TextField()
     address = models.TextField()

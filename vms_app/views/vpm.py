@@ -2,6 +2,13 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ..models.vendor import Vendor
 import json
+import hashlib
+
+
+def hash_password(password):
+    password_bytes = password.encode('utf-8')
+    hashed_password = hashlib.sha256(password_bytes).hexdigest()
+    return hashed_password
 
 
 @csrf_exempt
@@ -20,9 +27,12 @@ def vendor_list(request):
             name = data.get('name')
             contact_details = data.get('contact_details')
             address = data.get('address')
+            email = data.get('email')
+            password = data.get('password')
+            hashed_password = hash_password(password)
 
             if name and contact_details and address:
-                vendor = Vendor.objects.create(name=name, contact_details=contact_details, address=address)
+                vendor = Vendor.objects.create(name=name, contact_details=contact_details, address=address, email=email, password=hashed_password)
                 return JsonResponse({'message': 'Vendor created successfully', 'id': vendor.id}, status=201)
             else:
                 return JsonResponse({'error': 'Missing required fields'}, status=400)
